@@ -1,56 +1,55 @@
 import React, {Component} from 'react';
 
-function toggleCheckbox(index) {
-    const {checkboxes} = this.state;
-
-    checkboxes[index].checked = !checkboxes[index].checked;
-
-    this.setState({
-        checkboxes,
-        unchecked: this.state.checkboxes.filter(checkbox => checkbox.checked === false).length
-    });
-}
-
-function deleteToDo(arrayindex) {
-    var {checkboxes} = this.state;
-    this.setState({
-        checkboxes: checkboxes.filter((item, index) => index !== arrayindex),
-        unchecked: checkboxes.filter((item, index) => index !== arrayindex && item.checked === false).length
-    });
-}
-
-function renderCheckboxes() {
-    const {checkboxes} = this.state;
-    console.log(checkboxes);
-    return (
-        <ul id="todo-list ul" className="todo-list">
-            {checkboxes.map((checkbox, index) =>
-                <li className="todo-container">
-                    <label>
-                        <input className="todo-checkbox"
-                               type="checkbox"
-                               checked={checkbox.checked}
-                               onChange={toggleCheckbox.bind(this, index)}
-                        />
-                        {checkbox.label}
-                    </label>
-                    <button className="todo-delete" onClick={deleteToDo.bind(this, index)}>Delete</button>
-                </li>
-            )}
-        </ul>
-    );
-}
-
-
 class ToDo extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             checkboxes: [],
             unchecked: 0
         };
         this.newTodo = this.newTodo.bind(this);
+        this.toggleCheckbox = this.toggleCheckbox.bind(this);
+        this.deleteToDo = this.deleteToDo.bind(this);
+    }
+
+    toggleCheckbox(index) {
+        const {checkboxes} = this.state;
+        checkboxes[index].checked = !checkboxes[index].checked;
+        this.setState({
+            checkboxes,
+            unchecked: this.state.checkboxes.filter(checkbox => checkbox.checked === false).length
+        });
+    }
+
+
+    deleteToDo(arrayIndex) {
+        let {checkboxes} = this.state;
+        this.setState({
+            checkboxes: checkboxes.filter((item, index) => index !== arrayIndex),
+            unchecked: checkboxes.filter((item, index) => index !== arrayIndex && item.checked === false).length
+        });
+    }
+
+
+    renderCheckboxes() {
+        const {checkboxes} = this.state;
+        return (
+            <ul id="todo-list ul" className="todo-list">
+                {checkboxes.map((checkbox, index) =>
+                    <li key={index} className="todo-container">
+                        <label>
+                            <input className="todo-checkbox"
+                                   type="checkbox"
+                                   checked={checkbox.checked}
+                                   onChange={()=>this.toggleCheckbox(index)}
+                            />
+                            {checkbox.label}
+                        </label>
+                        <button className="todo-delete" onClick={()=> this.deleteToDo(index)}>Delete</button>
+                    </li>
+                )}
+            </ul>
+        );
     }
 
     newTodo() {
@@ -85,7 +84,7 @@ class ToDo extends Component {
                 {this.state.checkboxes.length > 0 ? <h3 className="center">TODO List</h3> : null}
 
                 <div>
-                    {renderCheckboxes.call(this)}
+                    {this.renderCheckboxes()}
                 </div>
             </div>
         );
