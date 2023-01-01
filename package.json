@@ -4,19 +4,19 @@
   "description": "The goal of this project is to use ReactJS capabilities and its paradigms by creating a TODO app. This app should be able to add TODOs and track the number of total TODOs as well as the number of unchecked TODOs.",
   "main": "main.js",
   "dependencies": {
-    "babel-loader": "^8.0.6",
-    "css-loader": "^3.0.0",
+    "babel-loader": "^8.3.0",
+    "css-loader": "^6.7.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "style-loader": "^0.23.1"
+    "style-loader": "^3.3.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
-    "webpack": "^4.35.2",
-    "webpack-cli": "^3.3.5",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^3.7.2"
   },
   "scripts": {
